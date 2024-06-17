@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Disney+ </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqk1w2/knoG80k332eYXYlOjLiPFYcKf6yY2Z83ףq4S+vq4zN94sF8twcQY7q8q+8KQzHGNc" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000e2c;
+        }
+        h2{
+            color: #fff;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+    
+        /* CARD */
+        .card {
+        position: relative;
+        background-color: #000e2c;
+        box-shadow: 0 0 20px rgba(241, 244, 255, 0.1);
+        border-radius: 10px;
+        overflow: hidden; /* Ensure the button is confined to the card */
+        }
+
+        .card:hover {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .card-body {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5); 
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover .card-body {
+            opacity: 1;
+        }
+
+        .watch-now-button {
+            z-index: 1; 
+        }
+
+
+        /* PRICING SECTION */
+        .pricing-section {
+            padding: 50px 0;
+        }
+
+        .pricing-table {
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .pricing-table h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .pricing-table .price {
+            font-size: 48px;
+            font-weight: bold;
+            color: #3da0b9;
+            margin-bottom: 20px;
+        }
+
+        .pricing-table .period {
+            font-size: 16px;
+            color: #ffffff;
+        }
+
+        .pricing-table ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .pricing-table ul li {
+            padding: 10px 0;
+            color: #ffffff;
+            border-bottom: 1px solid #eee;
+        }
+
+        .pricing-table ul li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-table button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .pricing-table button:hover {
+            background-color: #0056b3;
+        }
+
+        /* CTA SECTION */
+        .cta-section {
+            background-color: #070707;
+            color: #fff;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .cta-section button {
+            background-color: #44e3ff;
+            color: #000000;
+            font-weight: bold;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 100px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cta-section button:hover {
+            background-color: #000e2c;
+        }
+
+        
+
+        /* NAVBAR */
+        .navbar {
+            background-color: #ffffff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .navbar img {
+            height: 40px;
+        }
+
+        .navbar-nav {
+            display: flex;
+        }
+
+        .navbar-brand {
+            color: #000e2c;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar-nav {
+            margin-top: 10px;
+        }
+
+        .navbar-nav li {
+            margin-right: 20px;
+        }
+
+        .navbar-nav a {
+            color: #000e2c;
+            transition: color 0.3s;
+        }
+
+        .navbar-nav a:hover {
+            color: #ccc;
+        }
+
+        body, html {
+            height: 100%;
+        }
+
+        /* The hero image */
+        .hero-link {
+            text-decoration: none; /* Remove underline */
+            color: inherit; /* Inherit color from the hero section */
+            display: block; /* Ensure it covers the full area */
+            height: 100vh; /* Full viewport height */
+        }
+
+        .hero {
+            background-image: url('https://lumiere-a.akamaihd.net/v1/images/5up_presssiteheaderimage-pre_4352afc3.jpeg?region=0,0,2850,1194');
+            background-size: cover;
+            background-position: center; /* Center the image */
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        .hero:hover {
+            animation: fadeIn 1s ease-in-out forwards, hoverEffect 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes hoverEffect {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .footer {
+            background-color: #000000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer-social {
+            margin-top: 20px;
+        }
+
+        .footer-social a {
+            color: #fff;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: #ccc;
+        }
+        
+        /* ICON SECTION */
+        .icon-section {
+            padding: 50px 0;
+            text-align: center;
+            background-color: #000e2c;
+            color: #ffffff;
+        }
+
+        .icon-section i {
+            font-size: 48px;
+            color: #007bff;
+            margin: 20px;
+            transition: color 0.3s;
+        }
+
+        .icon-section i:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney Plus Logo">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEROES SECTION -->
+    <section id="hero" class="hero fade-in">
+        <div class="container">
+            <div class="row">
+            </section>
+
+    <!-- CTA SECTION -->
+     <section class="cta-section">
+        <div class="container">
+            <h2> Home of your Favorite stories and more</h2>
+                <p>Disney+ is where you can watch shows and movies from Disney, Pixar, Marvel, Star Wars, National Geographic and Star. From Hollywood movies to Korean dramas, there’s something for all to enjoy.</p>
+                <button class="btn"> SUBSCRIBE NOW</button>
+            </div>
+        </section>
+
+    <!-- MOVIE SELECTION SECTION -->
+    <section class="container my-5">
+        <h2 class="text-center text-white mb-4">Featured Movies</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="https://lumiere-a.akamaihd.net/v1/images/image002_18870_b56691ea.jpeg?region=0,0,1688,2500" class="card-img-top" alt="Movie 1">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary watch-now-button">Watch Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="https://i0.wp.com/pixarpost.com/wp-content/uploads/2023/06/Elemental-Real-3D-Poster.jpg?fit=1080%2C1600&ssl=1" class="card-img-top" alt="Movie 2">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary watch-now-button">Watch Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="https://i.ebayimg.com/images/g/A-QAAOSwx1VjJN58/s-l1600.jpg" class="card-img-top" alt="Movie 3">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary watch-now-button">Watch Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="https://loyolamaroon.com/wp-content/uploads/2020/01/StarWarsRiseofSkywalkerPoster-608x900.jpg" class="card-img-top" alt="Movie 4">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-primary watch-now-button">Watch Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- PRICING SECTION -->
+    <section class="pricing-section">
+        <div class="container">
+            <h2 class="text-center mb-5"> Now Streaming on Disney +</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="pricing-table">
+                        <h2>Basic</h2>
+                        <div class="price">$25</div>
+                        <div class="period">Disney+ Premium Monthly Plan</div>
+                        <ul>
+                            <li><i class="fa fa-check"></i> 1 User</li>
+                            <li><i class="fa fa-check"></i> 10 Projects</li>
+                            <li><i class="fa fa-check"></i> 100 Templates</li>
+                            <li><i class="fa fa-times"></i> Advanced Features</li>
+                            <li><i class="fa fa-times"></i> Priority Support</li>
+                        </ul>
+                        <button class="btn">Get Started</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="pricing-table">
+                        <h2>Standard</h2>
+                        <div class="price">$50</div>
+                        <div class="period">Disney+ Basic Annual Plan</div>
+                        <ul>
+                            <li><i class="fa fa-check"></i> 5 Users</li>
+                            <li><i class="fa fa-check"></i> 50 Projects</li>
+                            <li><i class="fa fa-check"></i> 500 Templates</li>
+                            <li><i class="fa fa-check"></i> Advanced Features</li>
+                            <li><i class="fa fa-times"></i> Priority Support</li>
+                        </ul>
+                        <button class="btn">Get Started</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="pricing-table">
+                        <h2>Pro</h2>
+                        <div class="price">$75</div>
+                        <div class="period">Disney+ Premium Annual Plan</div>
+                        <ul>
+                            <li><i class="fa fa-check"></i> 10 Users</li>
+                            <li><i class="fa fa-check"></i> 100 Projects</li>
+                            <li><i class="fa fa-check"></i> 1000 Templates</li>
+                            <li><i class="fa fa-check"></i> Advanced Features</li>
+                            <li><i class="fa fa-check"></i> Priority Support</li>
+                        </ul>
+                        <button class="btn">Get Started</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="icon-section">
+        <div class="container">
+            <h2 class="mb-5">Our Features</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <i class="fas fa-users"></i>
+                    <h3>Disney + Originals</h3>
+                    <p>Watch Original shows and movies that speak to you.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-comments"></i>
+                    <h3>Lots of Entertainment</h3>
+                    <p>From killing hits to epic thrills, explore thousands of hours full of love, laughter, and adventure.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-globe"></i>
+                    <h3>Uncover Your New Favorite</h3>
+                    <p>From Hollywood hits to K-dramas, dive into an ever-growing collection where every story matters.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 Rapid Wireframing. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="Untitled-1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
